@@ -17,4 +17,5 @@ $config = @{
     LogFileGroup = "C:\tmp\groups.log"
     ClassFolder  = "C:\BZTF\Klassen"
     Tmp = "C:\temp"
+    Prozesse = Get-Process
 }
