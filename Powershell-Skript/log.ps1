@@ -16,4 +16,5 @@ $config = @{
     LogFileUser  = "C:\tmp\users.log"
     LogFileGroup = "C:\tmp\groups.log"
     ClassFolder  = "C:\BZTF\Klassen"
+    Tmp = "C:\temp"
 }
