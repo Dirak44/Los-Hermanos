@@ -6,17 +6,16 @@
 # Bemerkungen:
 #--------------------------------------------------------------------------------
 
-#Meine Sammlung von Variabeln
-$SchuelerCsv  = "C:\tmp\PSProjekt\schueler.csv"
-$InitPw       = "bztf.001"
-$OUPath       = "OU=BZTF,DC=bztf,DC=local"
-$OULernende   = "Lernende"
-$OUKlasse     = "Klassengruppen"
-$LogFileUser  = "C:\tmp\users.log"
-$LogFileGroup = "C:\tmp\groups.log"
-$ClassFolder  = "C:\BZTF\Klassen"
-$Tmp = "C:\temp"
+#Unsere Sammlung von Variabeln
+$Global:SchuelerCsv  = "C:\tmp\PSProjekt\schueler.csv"
+$Global:InitPw       = "bztf.001"
+$Global:OUPath       = "OU=BZTF,DC=bztf,DC=local"
+$Global:OULernende   = "Lernende"
+$Global:OUKlasse     = "Klassengruppen"
+$Global:LogFileUser  = "C:\tmp\users.log"
+$Global:LogFileGroup = "C:\tmp\groups.log"
+$Global:ClassFolder  = "C:\BZTF\Klassen"
+#Meine Test Variabeln ob es richtig impotiert
 $Global:Prozesse = Get-Process
-
-$Global:var1 = "Es hs"
+$Global:var1 = "Nie HS"
 
