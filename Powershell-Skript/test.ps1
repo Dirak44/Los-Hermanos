@@ -1,5 +1,5 @@
-Import-Module -Name C:\pwsh_project\Los-Hermanos\Powershell-Skript\log.ps1 -Verbose
+Import-Module ".\Powershell-Skript\log.psm1"
 
+$Prozesse
 
-
-Write-Host $Prozesse
+Write-Host $var1
