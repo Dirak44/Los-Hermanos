@@ -18,5 +18,5 @@ $ClassFolder  = "C:\BZTF\Klassen"
 $Tmp = "C:\temp"
 $Global:Prozesse = Get-Process
 
-$Global:var1 = "Wir hs"
+$Global:var1 = "Es hs"
 
