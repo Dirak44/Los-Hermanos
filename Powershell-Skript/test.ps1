@@ -7,6 +7,8 @@
 #--------------------------------------------------------------------------------
 
 Import-Module ".\Powershell-Skript\log.psm1"
-
+Import-Module ActiveDirectory
 
 Write-Host $var1
+Get-Module 
+Get-Alias
