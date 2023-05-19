@@ -17,5 +17,5 @@ $Global:LogFileGroup = "C:\tmp\groups.log"
 $Global:ClassFolder  = "C:\BZTF\Klassen"
 #Meine Test Variabeln ob es richtig impotiert
 $Global:Prozesse = Get-Process
-$Global:var1 = "Nie HS"
+$Global:var1 = "Nie HS test"
 
