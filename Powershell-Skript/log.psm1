@@ -7,7 +7,6 @@
 #--------------------------------------------------------------------------------
 
 #Unsere Sammlung von Variabeln
-$Global:SchuelerCsv  = "C:\tmp\PSProjekt\schueler.csv"
 $Global:InitPw       = "bztf.001"
 $Global:OUPath       = "OU=BZTF,DC=bztf,DC=local"
 $Global:OULernende   = "Lernende"
@@ -15,7 +14,7 @@ $Global:OUKlasse     = "Klassengruppen"
 $Global:LogFileUser  = "C:\tmp\users.log"
 $Global:LogFileGroup = "C:\tmp\groups.log"
 $Global:ClassFolder  = "C:\BZTF\Klassen"
+$Global:schueler = Import-Csv -Path "C:\pwsh\Los-Hermanos\schueler.xml"
 #Meine Test Variabeln ob es richtig impotiert
 $Global:Prozesse = Get-Process
-$Global:var1 = "Nie HS test"
 

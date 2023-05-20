@@ -8,7 +8,7 @@
 
 Import-Module ".\Powershell-Skript\log.psm1"
 Import-Module ActiveDirectory
-
-Write-Host $var1
-Get-Module 
-Get-Alias
+foreach ($Global:schueler in $schuelers) {
+    New-ADUser -name $schueler.Name -GivenName $schueler.FirstName -Surname $schueler.Lastname -SamAccountName $schueler.Username -UserPrincipalName $schueler.UPN -AccountPassword (ConvertTo-SecureString $schueler.Password -AsPlainText -Force) -Enabled $true
+    Write-Host "Benutzer $($user.Name) wurde erstellt."
+}
