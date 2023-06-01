@@ -14,7 +14,7 @@ $Global:OUKlasse     = "Klassengruppen"
 $Global:LogFileUser  = "C:\tmp\users.log"
 $Global:LogFileGroup = "C:\tmp\groups.log"
 $Global:ClassFolder  = "C:\BZTF\Klassen"
-[xml]$Global:schueler = Get-Content -Path "C:\pwsh\Los-Hermanos\schueler.xml"
+$Global:schueler = [xml](Get-Content -Path "C:\pwsh\Los-Hermanos\schueler.xml")
 #Meine Test Variabeln ob es richtig impotiert
 
 

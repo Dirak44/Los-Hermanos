@@ -3,7 +3,7 @@
 # Funktion des Skripts: Usere Testumgebung um bestimmte Funktione/Abläufe zu testen.
 # Datum: 11.05.2023
 # Version: 1.0
-# Bemerkungen:
+# Bemerkungen: Hat nicht funktioniert
 #--------------------------------------------------------------------------------
 
 Import-Module ".\Powershell-Skript\log.psm1"
