@@ -8,6 +8,7 @@
 
 #Unsere Sammlung von Variabeln
 $Global:InitPw       = "bztf.001"
+#Neue Domaine erstellen
 $Global:OUPath       = "OU=BZTF,DC=bztf,DC=local"
 $Global:OULernende   = "Lernende"
 $Global:OUKlasse     = "Klassengruppen"
