@@ -1,19 +1,21 @@
+# Bemerkung:
+# Hat funktioniert ist die 2 Verison
 # Skript um AD Benutzer erstellen 
 
 Import-Module ".\Powershell-Skript\log.psm1"
 Import-Module ActiveDirectory
-
+$xml = [xml](Get-Content -Path "C:\pwsh\Los-Hermanos\schueler.xml")
 # Zählervariable initialisieren
 $counter = 0
 
 # Namespace definieren
-$namespace = New-Object System.Xml.XmlNamespaceManager($Global:schueler.NameTable)
+$namespace = New-Object System.Xml.XmlNamespaceManager($xml.NameTable)
 $namespace.AddNamespace("ns", "http://schemas.microsoft.com/powershell/2004/04")
 # foreach ($obj in $Global:schueler.SelectNodes("//ns:Obj", $namespace))
 #
 
 # Durch die Objekte in der XML-Datei iterieren
-foreach ($obj in $Global:schueler.SelectNodes("//ns:Obj", $namespace)) {
+foreach ($obj in $xml.SelectNodes("//ns:Obj", $namespace)) {
     # MS-Element auslesen
     $msElement = $obj.SelectSingleNode("ns:MS", $namespace).InnerText
 
@@ -39,6 +41,10 @@ foreach ($obj in $Global:schueler.SelectNodes("//ns:Obj", $namespace)) {
         'AccountPassword' = (ConvertTo-SecureString -String 'DeinPasswort' -AsPlainText -Force)
         'ChangePasswordAtLogon' = $false
     }
+
+    #Erstellt die verschiedenen Klasse, wenn diese schon vorhanden sind.
+    
+
     New-ADUser @schuelerParams -ErrorAction SilentlyContinue
 
     # Benutzer der Klasse hinzufügen
@@ -49,6 +55,6 @@ foreach ($obj in $Global:schueler.SelectNodes("//ns:Obj", $namespace)) {
 
     # Fortschritt anzeigen
     $counter++
-    Write-Host "Schüler $counter erstellt: $vorname $name"
+    Write-Host "Schueler erstellt: $benutzername" + "Anzahl impotierts: $counter"
 }
 
