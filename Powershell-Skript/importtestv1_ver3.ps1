@@ -33,7 +33,7 @@ function ADimpotieren {
     # Funktion zum Erstellen einer Klasse
     function Gruppernerstellen($className) {
         if (-not (Get-ADGroup -Filter "Name -eq '$className'")) {
-            New-ADGroup -Name $className -GroupScope Global -Path "$ouPath/$groupsOU"
+            New-ADGroup -Name $className -GroupScope Global -Path "$ouPath/$groupsOU" -ErrorAction SilentlyContinue
             Write-Host "Klasse erstellt: $className"
         }
     }
