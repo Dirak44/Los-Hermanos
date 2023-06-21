@@ -17,6 +17,9 @@ $Global:OUPathklassegruppen = "OU=Klassengruppen,OU=BZTF,DC=bztf,DC=local"
 $Global:OULernende   = "Lernende"
 $Global:OUKlasse     = "Klassengruppen"
 
+#Logpfade
+$Global:tmppath = "C:\tmp"
+
 $Global:LogFileUser  = "C:\tmp\users.log"
 $Global:LogFileGroup = "C:\tmp\groups.log"
 $Global:ClassFolder  = "C:\BZTF\Klassen"
