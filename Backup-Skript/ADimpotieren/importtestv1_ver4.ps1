@@ -1,5 +1,3 @@
-# Skript um AD Benutzer erstellen V3 hier versuche ich eine Funktion daraus zu machen
-
 Import-Module ".\Powershell-Skript\log.psm1"
 Import-Module ActiveDirectory
 
@@ -19,30 +17,15 @@ function ADimpotieren {
         }
     }
 
-    # Pfad zu den OUs aus dem Logfile extrahieren
-    $ouPath = $Global:OUPath
+    # OU für Benutzer erstellen
+    $usersOU = "Benutzer"
+    $usersOUPath = "OU=$usersOU,DC=deine-domain,DC=com"
+    OUerstellen $usersOU $usersOUPath
 
-    # Benutzer-OU erstellen
-    $usersOU = $Global:OULernende
-    OUerstellen $usersOU "$ouPath,$($ouPath.Split(',')[1])"
-
-    # Gruppen-OU erstellen
-    $groupsOU = $Global:OUKlasse
-    OUerstellen $groupsOU "$ouPath,$($ouPath.Split(',')[1])"
-
-    # Funktion zum Erstellen einer Klasse
-    function Gruppernerstellen($className) {
-        if (-not (Get-ADGroup -Filter "Name -eq '$className'")) {
-            New-ADGroup -Name $className -GroupScope Global -Path "$ouPath/$groupsOU" -ErrorAction SilentlyContinue
-            Write-Host "Klasse erstellt: $className"
-        }
-    }
-
-    # Funktion zum Hinzufügen eines Schülers zu einer Klasse
-    function Gruppenzuweisen($className, $studentName) {
-        Add-ADGroupMember -Identity $className -Members $studentName
-        Write-Host "Schüler $studentName der Klasse $className hinzugefuegt"
-    }
+    # OU für Gruppen erstellen
+    $groupsOU = "Gruppen"
+    $groupsOUPath = "OU=$groupsOU,DC=deine-domain,DC=com"
+    OUerstellen $groupsOU $groupsOUPath
 
     foreach ($obj in $Global:schueler.SelectNodes("//ns:Obj", $namespace)) {
         # MS-Element auslesen
@@ -71,20 +54,29 @@ function ADimpotieren {
             'ChangePasswordAtLogon' = $false
         }
     
-        New-ADUser @schuelerParams -Path "$ouPath/$usersOU" -ErrorAction SilentlyContinue
-    
+        New-ADUser @schuelerParams -Path $usersOUPath -ErrorAction SilentlyContinue
+
         # Fortschritt anzeigen
         $counter++
         Write-Host "Schueler erstellt: $benutzername" + "Anzahl impotierts: $counter"
 
         # Klassen als Gruppen erstellen und Schülern zuweisen
         $classGroup = "Klasse-$klasse"
-        Gruppernerstellen $classGroup
-        Gruppenzuweisen $classGroup $benutzername
+        if (-not (Get-ADGroup -Filter "Name -eq '$classGroup'")) {
+            New-ADGroup -Name $classGroup -GroupScope Global -Path $groupsOUPath -ErrorAction SilentlyContinue
+            Write-Host "Klasse erstellt: $classGroup"
+        }
+        Add-ADGroupMember -Identity $classGroup -Members $benutzername
+        Write-Host "Schüler $benutzername der Klasse $classGroup hinzugefuegt"
 
         $classGroup2 = "Klasse-$klasse2"
-        Gruppernerstellen $classGroup2
-        Gruppenzuweisen $classGroup2 $benutzername
+        if (-not (Get-ADGroup -Filter "Name -eq '$classGroup2'")) {
+            New-ADGroup -Name $classGroup2 -GroupScope Global -Path $groupsOUPath -ErrorAction SilentlyContinue
+            Write-Host "Klasse erstellt: $classGroup2"
+        }
+        Add-ADGroupMember -Identity $classGroup2 -Members $benutzername
+        Write-Host "Schüler $benutzername der Klasse $classGroup2 hinzugefuegt"
     }
 }
+
 ADimpotieren

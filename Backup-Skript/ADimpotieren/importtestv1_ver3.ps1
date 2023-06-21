@@ -11,10 +11,26 @@ function ADimpotieren {
     $namespace = New-Object System.Xml.XmlNamespaceManager($Global:schueler.NameTable)
     $namespace.AddNamespace("ns", "http://schemas.microsoft.com/powershell/2004/04")
 
+    # Funktion zum Erstellen einer OU
+    function OUerstellen($ouName, $ouPath) {
+        if (-not (Get-ADOrganizationalUnit -Filter "Name -eq '$ouName'")) {
+            New-ADOrganizationalUnit -Name $ouName -Path $ouPath
+            Write-Host "OU erstellt: $ouName"
+        }
+    }
+
+    # Pfad zu den OUs aus dem Logfile extrahieren
+    $ouPath = $Global:OUPath
+    # Benutzer-OU erstellen
+    OUerstellen $Global:OULernende $Global:OUPathlernende
+    # Gruppen-OU erstellen
+    $groupsOU = $Global:OUKlasse
+    OUerstellen $groupsOU $ouPath
+
     # Funktion zum Erstellen einer Klasse
     function Gruppernerstellen($className) {
         if (-not (Get-ADGroup -Filter "Name -eq '$className'")) {
-            New-ADGroup -Name $className -GroupScope Global -Path "OU=Klassen,DC=deine-domain,DC=com"
+            New-ADGroup -Name $className -GroupScope Global -Path "$ouPath/$groupsOU" -ErrorAction SilentlyContinue
             Write-Host "Klasse erstellt: $className"
         }
     }
@@ -31,7 +47,7 @@ function ADimpotieren {
     
         # Attribute aus dem MS-Element extrahieren
         $attributes = $msElement -split ';'
-    
+
         # Attribute in Variablen speichern
         $name = $attributes[0]
         $vorname = $attributes[1]
@@ -39,31 +55,34 @@ function ADimpotieren {
         $klasse = $attributes[3]
         $klasse2 = $attributes[4]
     
-        #Benutzer im AD erstellen
+        # Benutzer im AD erstellen
         $schuelerParams = @{
             'SamAccountName' = $benutzername
             'GivenName' = $vorname
             'Surname' = $name
             'Name' = "$vorname $name"
-            'UserPrincipalName' = "$benutzername@butzbach.ch"
+            'UserPrincipalName' = "$benutzername@bztf.local"
             'Enabled' = $true
             'PasswordNeverExpires' = $true
-            'AccountPassword' = (ConvertTo-SecureString -String 'DeinPasswort' -AsPlainText -Force)
+            'AccountPassword' = (ConvertTo-SecureString -String $Global:InitPw -AsPlainText -Force)
             'ChangePasswordAtLogon' = $false
         }
-        New-ADUser @schuelerParams -ErrorAction SilentlyContinue
     
-        #Fortschritt anzeigen
+        # New-ADUser @schuelerParams -Path "$ouPath/$usersOU" -ErrorAction SilentlyContinue
+        New-ADUser $schuelerParams  -Path "$Global:OUPathlernende" -ErrorAction SilentlyContinue
+
+        # Fortschritt anzeigen
         $counter++
         Write-Host "Schueler erstellt: $benutzername" + "Anzahl impotierts: $counter"
 
-        #Klassen erstellen und Schülern zuweisen
-        Gruppernerstellen $klasse
-        Gruppenzuweisen $klasse $benutzername
-     
-        Gruppernerstellen $klasse2
-        Gruppenzuweisen $klasse2 $benutzername
+        # Klassen als Gruppen erstellen und Schülern zuweisen
+        $classGroup = "Klasse-$klasse"
+        Gruppernerstellen $classGroup -Path "$Global:OUPathklassegruppen"
+        Gruppenzuweisen $classGroup $benutzername
+
+        $classGroup2 = "Klasse-$klasse2"
+        Gruppernerstellen $classGroup2 -Path "$Global:OUPathklassegruppen"
+        Gruppenzuweisen $classGroup2 $benutzername
     }
-    
 }
 ADimpotieren

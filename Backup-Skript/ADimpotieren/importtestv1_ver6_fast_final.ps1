@@ -1,10 +1,3 @@
-#--------------------------------------------------------------------------------
-# Autor: Tommaso und Rene
-# Funktion des Skripts: Das ist die Bulk-Funktion um die Benutzer zu impotieren.
-# Datum: 21.06.2023
-# Version: 6.0
-# Bemerkungen: Hatte 6 andere Verisonen des Import
-#--------------------------------------------------------------------------------
 Import-Module ".\Powershell-Skript\log.psm1"
 Import-Module ActiveDirectory
 
@@ -23,13 +16,6 @@ function ADimpotieren {
         New-ADOrganizationalUnit -Name "Klassengruppen" -Path $ouPath -ErrorAction SilentlyContinue
         Write-Host "OU 'Klassengruppen' erstellt"
     }
-
-    # Überprüfen, ob die OU "Lernende" vorhanden ist, andernfalls erstellen
-    if (-not (Get-ADOrganizationalUnit -Filter "Name -eq '$($Global:OULernende)'")) {
-        New-ADOrganizationalUnit -Name $Global:OULernende -Path $ouPath -ErrorAction SilentlyContinue
-        Write-Host "OU '$($Global:OULernende)' erstellt"
-    }
-
 
     foreach ($obj in $Global:schueler.SelectNodes("//ns:Obj", $namespace)) {
         $msElement = $obj.SelectSingleNode("ns:MS", $namespace).InnerText
@@ -65,7 +51,7 @@ function ADimpotieren {
                 Write-Host "Klasse erstellt: $classGroup"
             }
             Add-ADGroupMember -Identity $classGroup -Members $benutzername
-            Write-Host "Schueler $benutzername der Klasse $classGroup hinzugefuegt"
+            Write-Host "Schüler $benutzername der Klasse $classGroup hinzugefuegt"
         }
 
         if ($klasse2) {
@@ -75,7 +61,9 @@ function ADimpotieren {
                 Write-Host "Klasse erstellt: $classGroup2"
             }
             Add-ADGroupMember -Identity $classGroup2 -Members $benutzername
-            Write-Host "Schueler $benutzername der Klasse $classGroup2 hinzugefuegt"
+            Write-Host "Schüler $benutzername der Klasse $classGroup2 hinzugefuegt"
         }
     }
 }
+
+ADimpotieren
