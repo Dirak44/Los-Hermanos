@@ -16,8 +16,6 @@ function Write-Log {
     Add-content -Path $Global:LogFileUser -Value "$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss')) - $Message"
 }
 
-
-
 function Log-ADUserInformation {
     # Zeitpunkt der Protokollierung
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
