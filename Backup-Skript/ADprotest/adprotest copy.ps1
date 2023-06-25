@@ -1,24 +1,20 @@
 Import-Module ".\Powershell-Skript\log.psm1"
 Import-Module ActiveDirectory
 
-if(!(Test-Path $Global:tmppath))
-{
-    new-item -ItemType Directory -Path $Global:tmppath
-    Write-Host Order tmp unter $Global:tmppath wurde erstellt.
-}else {
-    Write-Host dieser Order ist schon bereits vorhanden.
-}
-
-function Write-Log {
-    param (
-        [string]$Message
-    )
-    Add-content -Path $Global:LogFileUser -Value "$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss')) - $Message"
-}
-
 function Log-ADUserInformation {
+    $targetTime = Get-Date -Hour 15 -Minute 1 -Second 0
+
+    # Überprüfen, ob die aktuelle Uhrzeit vor der Zielzeit liegt
+    if ((Get-Date) -lt $targetTime) {
+        # Berechnen der verbleibenden Zeit bis zur Zielzeit
+        $waitTime = $targetTime - (Get-Date)
+
+        Write-Host "Warten auf $targetTime..."
+        Start-Sleep -Seconds $waitTime.TotalSeconds
+    }
+
     # Zeitpunkt der Protokollierung
-    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $timestamp = Get-Date -Format "yyyy-MM-dd 15:mm:ss"
 
     # Alle AD-Benutzer abrufen
     $users = Get-ADUser -Filter * -Properties PasswordLastSet, LastLogonDate, LogonCount
@@ -36,3 +32,4 @@ function Log-ADUserInformation {
 
     Write-Host "AD User information logged successfully for $users.Count users."
 }
+Log-ADUserInformation

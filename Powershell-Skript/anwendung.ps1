@@ -28,7 +28,7 @@ while($true){
     }elseif($Eingabe -eq '1'){
         ADimpotieren
     } elseif($Eingabe -eq '2'){
-        Log-ADUserInformation
+        Log-ADUserInfo
     } elseif($Eingabe -eq '3'){
         
     }

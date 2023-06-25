@@ -16,7 +16,7 @@ function Write-Log {
     Add-content -Path $Global:LogFileUser -Value "$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss')) - $Message"
 }
 
-function Log-ADUserInformation {
+function Log-ADUserInfo {
 
     if(!(Test-Path $Global:tmppath))
 {
