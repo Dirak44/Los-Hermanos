@@ -42,6 +42,5 @@ function Log-ADUserInfo {
 
         Write-Log -Message $logMessage
     }
-
     Write-Host "AD User information logged successfully for $users.Count users."
 }
