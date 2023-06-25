@@ -19,7 +19,7 @@ while($true){
     1. ADimport
     2. Sicherheitsinfo
     3. User anpassen
-    4. übersicht Benutzer"
+    4. Uebersicht Benutzer"
     $Eingabe = read-host -prompt "Bitte Zahl eingeben"
 
 
