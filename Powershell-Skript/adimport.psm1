@@ -47,13 +47,13 @@ function ADimpotieren {
             'Surname' = $name
             'Name' = "$vorname $name"
             'UserPrincipalName' = "$benutzername@bztf.local"
-            'Enabled' = $true
+            'Enabled' = $false
             'PasswordNeverExpires' = $true
             'AccountPassword' = (ConvertTo-SecureString -String $Global:InitPw -AsPlainText -Force)
             'ChangePasswordAtLogon' = $false
         }
 
-        New-ADUser @schuelerParams -Path $Global:OUPathlernende -ErrorAction SilentlyContinue
+        New-ADUser @schuelerParams -Path $Global:OUPathlernende -ErrorAction SilentlyContinue 
 
         $counter++
         Write-Host "Schüler erstellt: $benutzername" + " Anzahl importiert: $counter"

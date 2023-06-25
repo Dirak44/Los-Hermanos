@@ -12,6 +12,7 @@ Import-Module ".\Powershell-Skript\adprotokoll.psm1"
 
 Import-Module ActiveDirectory
 
+
 while($true){
     "Hinweis: Starten sie das Skirpt als Admin
     0. Exit
@@ -28,7 +29,11 @@ while($true){
         ADimpotieren
     } elseif($Eingabe -eq '2'){
         Log-ADUserInformation
-    } else{
+    } elseif($Eingabe -eq '3'){
+        
+    }
+    
+    else{
         Write-Host 'Die Eingabe ist keine Zahl zwischen 0 und 4' -ForegroundColor Red
     }
 
