@@ -30,7 +30,6 @@ function ADimpotieren {
         Write-Host "OU '$($Global:OULernende)' erstellt"
     }
 
-
     foreach ($obj in $Global:schueler.SelectNodes("//ns:Obj", $namespace)) {
         $msElement = $obj.SelectSingleNode("ns:MS", $namespace).InnerText
         $attributes = $msElement -split ';'

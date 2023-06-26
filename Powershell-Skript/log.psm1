@@ -7,6 +7,7 @@
 #--------------------------------------------------------------------------------
 
 #Unsere Sammlung von Variabeln
+$Global:InitPw       = "bztf.001"
 $Global:schueler = [xml](Get-Content -Path "C:\pwsh\Los-Hermanos\schueler.xml")
 #OU Verzeichnisse
 $Global:OUPath       = "OU=BZTF,DC=bztf,DC=local"
