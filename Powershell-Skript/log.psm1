@@ -7,7 +7,6 @@
 #--------------------------------------------------------------------------------
 
 #Unsere Sammlung von Variabeln
-$Global:InitPw       = "bztf.001"
 $Global:schueler = [xml](Get-Content -Path "C:\pwsh\Los-Hermanos\schueler.xml")
 #OU Verzeichnisse
 $Global:OUPath       = "OU=BZTF,DC=bztf,DC=local"
@@ -20,9 +19,6 @@ $Global:OUKlasse     = "Klassengruppen"
 #Logpfade
 $Global:tmppath = "C:\tmp"
 
-$Global:LogFileUser  = "C:\tmp\users.log"
-$Global:LogFileGroup = "C:\tmp\groups.log"
-$Global:ClassFolder  = "C:\BZTF\Klassen"
 
 
 
