@@ -1,3 +1,12 @@
+#--------------------------------------------------------------------------------
+# Autor: Tommaso und Rene
+# Funktion des Skripts: Dieses Skript hat 3 Funktionen um den User zu unlocken, Passwort ändern und auch um diese zu aktivieren.
+# Datum: 24.05.2023
+# Version: 1.0
+# Bemerkungen:
+#--------------------------------------------------------------------------------
+
+
 Import-Module ActiveDirectory
 function Unlock-ADBenutzer {
     
@@ -29,6 +38,19 @@ function Aktivieren-ADBenutzer {
     } else {
         Enable-ADAccount -Identity $Username
         Write-Output "Das Konto $Username wurde aktiviert."
+    }
+}
+
+function Passwort-ändern {
+    
+    $username = Read-Host "Geben Sie den Benutzernamen ein"
+    $user = Get-ADUser -Identity $Username -ErrorAction SilentlyContinue
+    if ($user -eq $null) {
+        Write-Output "Das Konto $Username existiert nicht." 
+    } else {
+        $newPassword = Read-Host "Geben Sie das neue Passwort ein" -AsSecureString
+        Set-ADAccountPassword -Identity $Username -NewPassword $newPassword -Reset
+        Write-Output "Das Passwort fuer das Konto $Username wurde erfolgreich geaendert."
     }
 }
 
