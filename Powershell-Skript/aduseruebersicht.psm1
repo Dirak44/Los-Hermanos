@@ -1,3 +1,11 @@
+#--------------------------------------------------------------------------------
+# Autor: Tommaso und Rene
+# Funktion des Skripts: Hier werden die Sachen der User ausgelesen.
+# Datum: 26.06.2023
+# Version: 1.0 
+# Bemerkungen: 
+#--------------------------------------------------------------------------------
+
 Import-Module ActiveDirectory
 
 # Funktion zur Anzeige der Übersicht aller AD-Benutzer ohne Passwort
@@ -56,12 +64,18 @@ function IsUserLockedOut($username) {
 
 # Funktion zur Auswahl der gewünschten Übersicht
 function SelectFunction {
-    Write-Host "Bitte wähle eine Funktion:"
-    Write-Host "1. Übersicht aller AD-Benutzer ohne Passwort"
-    Write-Host "2. Übersicht aller AD-Benutzer mit Passwort, das nie abläuft"
-    Write-Host "3. Übersicht der deaktivierten und gesperrten AD-Benutzer"
-    Write-Host "4. Umfassende Übersicht aller AD-Benutzer"
-    Write-Host "0. Exit"
+    Write-Host " "
+    Write-Host " "
+    Write-Host "    ******************************************"
+    Write-Host "    Bitte wähle eine Funktion:"
+    Write-Host "    0. Exit"
+    Write-Host "    1. Übersicht aller AD-Benutzer ohne Passwort"
+    Write-Host "    2. Übersicht aller AD-Benutzer mit Passwort, das nie abläuft"
+    Write-Host "    3. Übersicht der deaktivierten und gesperrten AD-Benutzer"
+    Write-Host "    4. Umfassende Übersicht aller AD-Benutzer"
+    Write-Host "    ******************************************"
+    Write-Host " "
+    Write-Host " "
 
     $choice = Read-Host "Gib die Nummer der gewünschten Funktion ein"
 
@@ -86,11 +100,9 @@ function SelectFunction {
             return
         }
         default {
-            Write-Host "Ungültige Eingabe. Bitte wähle eine Zahl zwischen 0 und 4."
+            Write-Host "Ungueltige Eingabe. Bitte wähle eine Zahl zwischen 0 und 4."
             SelectFunction
         }
     }
 }
 
-# Aufrufen der Funktion zur Auswahl
-SelectFunction

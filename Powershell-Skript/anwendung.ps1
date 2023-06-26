@@ -10,17 +10,27 @@ Import-Module ".\Powershell-Skript\log.psm1"
 Import-Module ".\Powershell-Skript\adimport.psm1"
 Import-Module ".\Powershell-Skript\adprotokoll.psm1"
 Import-Module ".\Powershell-Skript\aduseranpassung.psm1"
+Import-Module ".\Powershell-Skript\aduseruebersicht.psm1"
 
 Import-Module ActiveDirectory
 
 
 while($true){
-    "Hinweis: Starten sie das Skirpt als Admin
+    "
+    
+    ******************************************
+                AD-Verwaltung
+    ******************************************
+    Hinweis: Starten sie das Skirpt als Admin
+    ******************************************
     0. Exit
     1. ADimport
     2. Sicherheitsinfo
     3. User anpassen
-    4. Uebersicht Benutzer"
+    4. Uebersicht Benutzer
+    ******************************************
+    
+    "
     $Eingabe = read-host -prompt "Bitte Zahl eingeben"
 
     if($Eingabe -eq '0'){
@@ -34,16 +44,22 @@ while($true){
         Start-Sleep -Seconds 5
         Log-ADUserInfo
     } elseif($Eingabe -eq '3'){
-        "Was moechten sie am User aendern?
-        0. Zurück zum Hauptmenu
+        "
+
+        ******************************************
+        Was moechten sie am User aendern?
+        0. Zurueck zum Hauptmenu
         1. ADimport
         2. Sicherheitsinfo
         3. User anpassen
-        4. Uebersicht Benutzer"
+        4. Uebersicht Benutzer
+        ******************************************
+        
+        "
         $Eingabe2 = read-host -prompt "Bitte Zahl eingeben"
 
         if($Eingabe2 -eq '0'){
-            Write-Host 'Zurückkehren zum Hauptmenu....' -ForegroundColor Green
+            Write-Host 'Zurueckkehren zum Hauptmenu....' -ForegroundColor Green
             Start-Sleep -Seconds 5
         }elseif($Eingabe2 -eq '1'){
             Start-Sleep -Seconds 5
@@ -59,10 +75,13 @@ while($true){
             Start-Sleep -Seconds 5
         }
 
-    }elseif($Eingabe -eq '4'){
-
+    }elseif($Eingabe -eq '4')
+    {
+        SelectFunction
+        Start-Sleep -Seconds 3
     }else{
         Write-Host 'Die Eingabe ist keine Zahl zwischen 0 und 4' -ForegroundColor Red
+        Start-Sleep -Seconds 3
     }
 
 }
