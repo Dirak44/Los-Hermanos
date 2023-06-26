@@ -23,7 +23,6 @@ while($true){
     4. Uebersicht Benutzer"
     $Eingabe = read-host -prompt "Bitte Zahl eingeben"
 
-
     if($Eingabe -eq '0'){
      exit
     }elseif($Eingabe -eq '1'){
@@ -31,8 +30,8 @@ while($true){
     } elseif($Eingabe -eq '2'){
         Log-ADUserInfo
     } elseif($Eingabe -eq '3'){
-        "Was möchten sie am User ändern?
-        0. Exit
+        "Was moechten sie am User aendern?
+        0. Zurück zum Hauptmenu
         1. ADimport
         2. Sicherheitsinfo
         3. User anpassen
@@ -42,15 +41,14 @@ while($true){
         if($Eingabe2 -eq '0'){
 
         }elseif($Eingabe2 -eq '1'){
-
+            Unlock-ADBenutzer
         }elseif($Eingabe2 -eq '2'){
-            
+            Aktivieren-ADBenutzer
         }elseif($Eingabe2 -eq '3'){
-            
+            Passwort-ändern
         }else{
             Write-Host 'Die Eingabe ist keine Zahl zwischen 0 und 4' -ForegroundColor Red
         }
-
 
     }elseif($Eingabe -eq '4'){
 
