@@ -49,9 +49,9 @@ while($true){
         ******************************************
         Was moechten sie am User aendern?
         0. Zurueck zum Hauptmenu
-        1. ADimport
-        2. Sicherheitsinfo
-        3. User anpassen
+        1. Unlock-Benutzer
+        2. Aktivieren-ADBenutzer
+        3. User Passwort 
         4. Uebersicht Benutzer
         ******************************************
         
