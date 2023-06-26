@@ -38,12 +38,12 @@ function ShowDisabledAndLockedOutADUsers {
 function ShowComprehensiveADUserOverview {
     $users = Get-ADUser -Filter * -Properties *
 
-    Write-Host "Umfassende Übersicht aller AD-Benutzer:"
+    Write-Host "Gesamte Übersicht aller AD-Benutzer:"
     foreach ($user in $users) {
         Write-Host "Benutzername: $($user.SamAccountName)"
-        Write-Host "Passwort nie abläuft: $($user.PasswordNeverExpires)"
-        Write-Host "Deaktiviert: $($user.Enabled)"
-        Write-Host "Gesperrt: $(IsUserLockedOut $user.SamAccountName)"
+        Write-Host "Passwort läuft nie ab: $($user.PasswordNeverExpires)"
+        Write-Host "Deaktivierte User: $($user.Enabled)"
+        Write-Host "Gesperrte User: $(IsUserLockedOut $user.SamAccountName)"
         Write-Host "------------------------"
     }
 }
