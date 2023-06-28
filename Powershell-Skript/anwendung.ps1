@@ -52,7 +52,6 @@ while($true){
         1. Unlock-Benutzer
         2. Aktivieren-ADBenutzer
         3. User Passwort 
-        4. Uebersicht Benutzer
         ******************************************
         
         "
@@ -71,7 +70,7 @@ while($true){
             Start-Sleep -Seconds 5
             Passwort-ändern
         }else{
-            Write-Host 'Die Eingabe ist keine Zahl zwischen 0 und 4' -ForegroundColor Red
+            Write-Host 'Die Eingabe ist keine Zahl zwischen 0 und 3' -ForegroundColor Red
             Start-Sleep -Seconds 5
         }
 
